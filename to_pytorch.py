@@ -49,6 +49,7 @@ def main():
     if not os.path.exists("data/torch/"):
         os.mkdir("data/torch/")
     input_files = glob("data/raw/*")
+    print("Processing...")
     for input_filename in input_files:
         print(input_filename)
         input_file = open(input_filename, "r")
@@ -62,6 +63,7 @@ def main():
             meta_dict.update({id_: next_protein})
         torch.save(meta_dict, "data/torch/{}".format(os.path.basename(input_filename) + ".pt"))
         input_file.close()
+    print("Done.")
 
 
 if __name__ == "__main__":
