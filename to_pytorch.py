@@ -8,7 +8,8 @@ import os
 
 
 def read_protein_from_file(file_pointer, include_tertiary=False):
-    """ Modified from github.com/OpenProtein/openprotein:preprocessing.py on June 20, 2019."""
+    """ Modified from github.com/OpenProtein/openprotein:preprocessing.py on June 20, 2019.
+        Original carries an MIT license, Copyright (c) 2018 Jeppe Hallgren. """
     dict_ = {}
     _dssp_dict = {'L': 0, 'H': 1, 'B': 2, 'E': 3, 'G': 4, 'I': 5, 'T': 6, 'S': 7}
     _mask_dict = {'-': 0, '+': 1}
@@ -46,9 +47,9 @@ def read_protein_from_file(file_pointer, include_tertiary=False):
 
 def main():
     """ Converts ProteinNet data in data/raw into Pytorch-saved dictionaries that contain non-tertiary data. """
-    if not os.path.exists("data/torch/"):
-        os.mkdir("data/torch/")
-    input_files = glob("data/raw/*")
+    if not os.path.exists(f"data/{CASP_VERSION}/torch/"):
+        os.mkdir(f"data/{CASP_VERSION}/torch/")
+    input_files = glob(f"data/{CASP_VERSION}/raw/*")
     print("Processing...")
     for input_filename in input_files:
         print(input_filename)
@@ -67,4 +68,6 @@ def main():
 
 
 if __name__ == "__main__":
+    import sys
+    script, CASP_VERSION = sys.argv
     main()
